@@ -1,0 +1,12 @@
+uv add fastapi==0.119.0
+uv add numba==0.61.2
+uv add numpy==2.3.3
+uv add openai==2.8.0
+uv add openpyxl==3.1.5
+uv add pydantic==2.12.2
+uv add pypinyin==0.55.0
+uv add Requests==2.32.5
+uv add soundfile==0.13.1
+uv add SQLAlchemy==2.0.44
+uv add starlette==0.48.0
+uv add uvicorn==0.37.0

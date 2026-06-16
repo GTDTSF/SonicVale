@@ -1,0 +1,31 @@
+# python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# JetBrains IDE
+.idea/
+
+# venv
+.venv/
+env/
+venv/
+
+
+# 打包输出
+dist
+build
+*.spec
+*.exe
+
+# logs
+*.log
+
+# database
+SonicValeData/
+
+# others
+.DS_Store"data.zip" 
+
+image/

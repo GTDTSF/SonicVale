@@ -1,0 +1,36 @@
+Metadata-Version: 2.4
+Name: sonicvale
+Version: 0.1.0
+Summary: Add your description here
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: aiohttp>=3.14.1
+Requires-Dist: fastapi==0.119.0
+Requires-Dist: markdown-it-py>=4.2.0
+Requires-Dist: numba==0.61.2
+Requires-Dist: openai==2.8.0
+Requires-Dist: openpyxl==3.1.5
+Requires-Dist: pydantic==2.12.2
+Requires-Dist: pypinyin==0.55.0
+Requires-Dist: python-multipart>=0.0.32
+Requires-Dist: requests==2.32.5
+Requires-Dist: soundfile==0.13.1
+Requires-Dist: sqlalchemy==2.0.44
+Requires-Dist: starlette==0.48.0
+Requires-Dist: uvicorn==0.37.0
+Requires-Dist: websockets>=16.0
+
+```
+app/
+├── core/               # 全局配置、tts引擎、llm引擎、ffmpeg封装、字幕生成、websocket、异步队列
+├── db/                 # 数据库连接和Base
+├── models/             # ORM模型
+├── dto/                # 数据传输对象（请求/响应验证）
+├── entity/             # 实体类（结合 ORM 与业务层）
+├── repositories/       # 数据库封装
+├── services/           # 核心业务逻辑
+├── routers/            # FastAPI路由接口
+└── main.py             # FastAPI启动入口
+
+
+```

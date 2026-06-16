@@ -1,0 +1,7 @@
+README.md
+pyproject.toml
+sonicvale.egg-info/PKG-INFO
+sonicvale.egg-info/SOURCES.txt
+sonicvale.egg-info/dependency_links.txt
+sonicvale.egg-info/requires.txt
+sonicvale.egg-info/top_level.txt
