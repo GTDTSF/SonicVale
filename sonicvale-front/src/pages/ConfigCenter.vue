@@ -124,10 +124,10 @@
       <!-- 通用设置 -->
       <el-tab-pane label="通用设置" name="general">
         <el-form label-width="140px">
-          <el-form-item label="默认项目路径">
-            <el-input v-model="defaultProjectsPath" readonly placeholder="未设置，创建项目前必须配置">
+          <el-form-item label="数据存储路径">
+            <el-input v-model="dataPath" readonly placeholder="未设置，使用默认路径">
               <template #append>
-                <el-button @click="pickDefaultProjectsPath">选择</el-button>
+                <el-button @click="pickDataPath">选择</el-button>
               </template>
             </el-input>
           </el-form-item>
@@ -221,24 +221,24 @@ import { fetchSettings, updateSettings } from '../api/settings'
 const activeTab = ref('llm')
 
 // ---------- 通用设置 ----------
-const defaultProjectsPath = ref('')
+const dataPath = ref('')
 
 const loadSettings = async () => {
   const res = await fetchSettings()
   if (res?.code === 200) {
-    defaultProjectsPath.value = res.data?.default_projects_path || ''
+    dataPath.value = res.data?.data_path || ''
   }
 }
 
-const pickDefaultProjectsPath = async () => {
+const pickDataPath = async () => {
   const dir = await window.native?.selectDir?.()
   if (dir) {
-    defaultProjectsPath.value = dir
-    const res = await updateSettings({ default_projects_path: dir })
-    if (res?.data?.data_path_changed) {
-      ElMessage.warning('检测到已有数据库，已自动绑定。请关闭并重新打开应用以加载数据。')
+    dataPath.value = dir
+    const res = await updateSettings({ data_path: dir })
+    if (res?.code === 200) {
+      ElMessage.warning('数据存储路径已更新，请关闭并重新打开应用以加载数据。')
     } else {
-      ElMessage.success('默认项目路径已更新')
+      ElMessage.error('设置失败')
     }
   }
 }

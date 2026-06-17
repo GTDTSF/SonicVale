@@ -24,17 +24,21 @@ def getSettingsPath():
 
 
 def getDataPath():
+    import logging
+    logger = logging.getLogger(__name__)
     try:
         from app.core.settings import load_settings
         s = load_settings()
         dp = s.get("data_path", "")
-        if dp and os.path.isdir(dp):
+        if dp:
+            if not os.path.exists(dp):
+                os.makedirs(dp, exist_ok=True)
+                logger.info("data_path 目录已创建: %s", dp)
+            elif not os.path.isdir(dp):
+                logger.warning("data_path 路径存在但不是目录（可能是云存储占位符），仍将使用此路径: %s", dp)
             return dp
-        if dp and not os.path.exists(dp):
-            os.makedirs(dp, exist_ok=True)
-            return dp
-    except Exception:
-        pass
+    except Exception as e:
+        logger.warning("读取 data_path 失败，使用默认路径: %s", e)
     if getattr(sys, "frozen", False):
         return os.path.join(os.environ["APPDATA"], "SonicVale-D", "SonicValeData")
     else:

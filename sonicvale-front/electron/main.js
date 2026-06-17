@@ -13,14 +13,14 @@ let backendProcess = null
 
 function startBackend() {
   const isDev = !app.isPackaged
-  const exePath = isDev
-    ? path.join(__dirname, 'main.exe') // dev 环境路径
-    : path.join(process.resourcesPath, 'app.asar.unpacked', 'electron', 'main.exe') // prod 路径
 
-  if (isDev && !fs.existsSync(exePath)) {
-    console.log('开发模式：未找到 main.exe，跳过后端启动（请手动启动 uvicorn）')
+  if (isDev) {
+    console.log('开发模式：跳过后端 exe 启动，请在另一个终端手动运行 uvicorn 查看调试信息')
+    console.log('  cd SonicVale && uvicorn app.main:app --reload --port 8200')
     return
   }
+
+  const exePath = path.join(process.resourcesPath, 'app.asar.unpacked', 'electron', 'main.exe')
 
   console.log('启动后端：', exePath)
 

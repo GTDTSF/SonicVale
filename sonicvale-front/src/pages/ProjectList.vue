@@ -278,20 +278,20 @@ const handleSubmit = () => {
         if (valid) {
             try {
                 const settingsRes = await fetchSettings()
-                let defaultPath = settingsRes?.data?.default_projects_path || ''
+                let defaultPath = settingsRes?.data?.data_path || ''
                 if (!defaultPath) {
                     const dir = await native?.selectDir?.()
                     if (!dir) {
-                        ElMessage.info('已取消创建，请先设置默认项目路径')
+                        ElMessage.info('已取消创建，请先设置数据存储路径')
                         return
                     }
                     defaultPath = dir
-                    const setRes = await updateSettings({ default_projects_path: dir })
+                    const setRes = await updateSettings({ data_path: dir })
                     if (setRes?.data?.data_path_changed) {
-                        ElMessage.warning('检测到已有数据库，已自动绑定。请关闭并重新打开应用后再次创建项目。')
+                        ElMessage.warning('数据存储路径已更新，请关闭并重新打开应用后再次创建项目。')
                         return
                     }
-                    ElMessage.success('默认项目路径已设置')
+                    ElMessage.success('数据存储路径已设置')
                 }
                 const res = await createProject(form.value)
                 if (res?.code === 200) {
